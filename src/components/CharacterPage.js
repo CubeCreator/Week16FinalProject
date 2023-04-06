@@ -10,7 +10,7 @@ class CharacterPage extends React.Component {
     render() {
         return (
             <div>
-                <h1>Character Page</h1>
+                <h3>Character Page</h3>
             </div>
         )
     }

@@ -10,7 +10,7 @@ class WeaponsPage extends React.Component {
     render() {
         return (
             <div>
-                <h1>Weapons Page</h1>
+                <h3>Weapons Page</h3>
             </div>
         )
     }

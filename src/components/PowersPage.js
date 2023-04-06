@@ -10,7 +10,7 @@ class PowersPage extends React.Component {
     render() {
         return(
             <div>
-                <h1>Powers Page</h1>
+                <h3>Powers Page</h3>
             </div>
         )
     }
