@@ -1,4 +1,4 @@
-const Project_ENDPOINT = ''
+const Project_ENDPOINT = 'https://6405117feed195a99f7baa23.mockapi.io/CharaList/Webpage'
 
 class ProjectAPI {
     get = async () => {
