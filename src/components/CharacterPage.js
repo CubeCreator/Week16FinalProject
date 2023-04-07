@@ -1,4 +1,5 @@
 import React from "react";
+import CharacterForm from "./CharacterForm"
 
 class CharacterPage extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class CharacterPage extends React.Component {
         return (
             <div>
                 <h3>Character Page</h3>
+                <CharacterForm />
             </div>
         )
     }

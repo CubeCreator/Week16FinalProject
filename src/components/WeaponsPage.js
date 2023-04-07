@@ -1,4 +1,7 @@
 import React from "react";
+import WeaponsDisplay from "./WeaponsDisplay";
+import WeaponsForm from "./WeaponsForm";
+import WeaponTags from "./WeaponTags";
 
 class WeaponsPage extends React.Component {
     constructor(props) {
@@ -11,6 +14,10 @@ class WeaponsPage extends React.Component {
         return (
             <div>
                 <h3>Weapons Page</h3>
+                <WeaponsForm />
+                <WeaponTags />
+
+                <WeaponsDisplay />
             </div>
         )
     }

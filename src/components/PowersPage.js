@@ -1,4 +1,7 @@
 import React from "react";
+import PowersDisplay from "./PowersDisplay";
+import PowersForm from "./PowersForm";
+import PowersAddOns from "./PowersAddOns";
 
 class PowersPage extends React.Component {
     constructor(props) {
@@ -11,6 +14,9 @@ class PowersPage extends React.Component {
         return(
             <div>
                 <h3>Powers Page</h3>
+                <PowersForm />
+                <PowersAddOns />
+                <PowersDisplay />
             </div>
         )
     }
