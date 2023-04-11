@@ -10,4 +10,19 @@ class ProjectAPI {
             console.log("There is an issue with Fetching the Project.")
         }
     }
+    addCharacter
+
+    deleteCharacter
+
+    addWeapon
+
+    updateWeapon
+
+    deleteWeapon
+
+    addPower
+
+    updatePower
+
+    deletePower
 }

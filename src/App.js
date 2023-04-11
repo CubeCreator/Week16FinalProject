@@ -6,6 +6,7 @@ import { Navbar } from 'react-bootstrap';
 import CharacterPage from './components/CharacterPage';
 import WeaponsPage from './components/WeaponsPage';
 import PowersPage from './components/PowersPage';
+import FullDisplayPage from './components/FullDisplayPage';
 
 function App() {
   return (
@@ -27,12 +28,16 @@ function App() {
             <li>
               <Link to="/Powers">Powers</Link>
             </li>
+            <li>
+              <Link to="/Submissions">Submissions</Link>
+            </li>
           </ul>
         </nav>
         <Routes>
           <Route path="/" element={<CharacterPage />}/>
           <Route path="/Weapons" element={<WeaponsPage />}/>
           <Route path="/Powers" element={<PowersPage />}/>
+          <Route path="/Submissions" element={<FullDisplayPage />}/>
         </Routes>
       </BrowserRouter>
     </div>

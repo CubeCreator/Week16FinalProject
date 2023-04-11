@@ -1,5 +1,7 @@
 import React from "react";
 import CharacterForm from "./CharacterForm"
+import WeaponsDisplay from "./WeaponsDisplay";
+import PowersDisplay from "./PowersDisplay";
 
 class CharacterPage extends React.Component {
     constructor(props) {
@@ -13,6 +15,8 @@ class CharacterPage extends React.Component {
             <div>
                 <h3>Character Page</h3>
                 <CharacterForm />
+                <WeaponsDisplay />
+                <PowersDisplay />
             </div>
         )
     }

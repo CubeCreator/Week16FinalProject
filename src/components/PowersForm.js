@@ -1,4 +1,6 @@
 import React from "react";
+import { Form } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 class PowersForm extends React.Component {
     constructor(props) {
@@ -10,7 +12,16 @@ class PowersForm extends React.Component {
     render() {
         return(
             <form>
-                <h5>Enter Power Details:</h5>
+                <Card>
+                    <Card.Header>Enter Power Details:</Card.Header>
+                    <Card.Body>
+                        <p>Power Name:</p>
+                        <Form.Control placeholder="Enter Name"/>
+                        <p>Power Details:</p>
+                        <Form.Control placeholder="Enter Details" as="textarea" rows={4}/>
+                    </Card.Body>
+                </Card>
+
             </form>
         )
     }

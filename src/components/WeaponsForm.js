@@ -17,7 +17,8 @@ class WeaponsForm extends React.Component {
                 <Card>
                     <Card.Header>Enter Weapon Details:</Card.Header>
                     <Card.Body>
-                        
+                        <p>Weapon Name:</p>
+                        <Form.Control placeholder="Enter Name"/>
                         <p>Weapon Slot:</p>
                         <Form.Select>
                             <option value="Primary">Primary</option>
@@ -50,7 +51,8 @@ class WeaponsForm extends React.Component {
                             <option value="Weapon Parts">Weapon Parts</option>
                             <option value="Weapon Upgrades">Weapon Upgrades</option>
                         </Form.Select>
-
+                        <br />
+                        <br />
                         <Button>Submit Weapon</Button>
                     </Card.Body>
                 </Card>
