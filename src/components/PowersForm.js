@@ -22,7 +22,10 @@ class PowersForm extends React.Component {
                         <Form.Control placeholder="Enter Details" as="textarea" rows={4}/>
                         <br />
                         
-                        <Button>Submit Power</Button>
+                        <Button onClick={
+                            console.log("You have submitted a Power!")
+                            
+                        }>Submit Power</Button>
                     </Card.Body>
                 </Card>
 

@@ -53,7 +53,9 @@ class WeaponsForm extends React.Component {
                         </Form.Select>
                         <br />
                         <br />
-                        <Button>Submit Weapon</Button>
+                        <Button onClick={
+                            console.log("You have submitted a Weapon!")
+                        }>Submit Weapon</Button>
                     </Card.Body>
                 </Card>
             </form>

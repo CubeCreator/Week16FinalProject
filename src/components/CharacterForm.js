@@ -198,7 +198,10 @@ class CharacterForm extends React.Component {
                         <p>Character Backstory:</p>
                         <Form.Control placeholder="Enter Details" as="textarea" rows={3} />
                         <br />
-                        <Button variant="success">Submit Character</Button>
+                        <Button variant="success" onClick={
+                            console.log("You have submitted a Character!")
+                            
+                            }>Submit Character</Button>
                     </Card.Body>
                 </Card>
             </form>
