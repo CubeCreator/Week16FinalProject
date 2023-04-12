@@ -5,24 +5,41 @@ class ProjectAPI {
         try {
             const resp = await fetch(Project_ENDPOINT)
             const data = await resp.json();
+            console.log(data)
             return data;
         } catch(e) {
             console.log("There is an issue with Fetching the Project.")
         }
     }
-    addCharacter
+    addCharacter = (name, gender, race, nationality, occupation, description, backstory) => {
 
-    deleteCharacter
+    }
 
-    addWeapon
+    deleteCharacter = (characterId) => {
 
-    updateWeapon
+    }
 
-    deleteWeapon
+    addWeapon = (name, slot, weaponType, clipType, specialType) => {
 
-    addPower
+    }
 
-    updatePower
+    updateWeapon = (newName) => {
 
-    deletePower
+    }
+
+    deleteWeapon = (weaponId) => {
+
+    }
+
+    addPower = (name, details) => {
+
+    }
+
+    updatePower = (newName) => {
+
+    }
+
+    deletePower = (powerId) => {
+        
+    }
 }
