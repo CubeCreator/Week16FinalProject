@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { projectAPI } from "../rest/ProjectAPI";
 
 class PowersDisplay extends React.Component {
     constructor(props) {
@@ -14,17 +15,18 @@ class PowersDisplay extends React.Component {
         this.getPowers();
     };
 
-    getPowers = () => {
-        
+    getPowers = async () => {
+        const powerList = await projectAPI.get();
+        this.setState({ powerList })
     };
 
     render () {
         if (this.state.powerList !== null)
             var powers = (this.state.powerList.map((n, index) => {
                 return (
-                    <div>
-                        <h5></h5>
-                        <p></p>
+                    <div key={index}>
+                        <h5>{n.powerInfo.PowerName}</h5>
+                        <p>{n.powerInfo.PowerDetails}</p>
                     </div>
                 )
 

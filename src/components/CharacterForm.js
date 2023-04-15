@@ -2,14 +2,48 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { projectAPI } from "../rest/ProjectAPI.js"
 import Tooltip from "react-bootstrap";
 
 class CharacterForm extends React.Component {
     constructor(props) {
         super(props)
+        
+        this.state = {
+            Name: "",
+            Gender: "Male",
+            Race: "Asian",
+            Nationality: "Argentina",
+            Occupation: "Accountant",
+            Description: "",
+            Backstory: ""
+        }
     }
 
     componentDidMount = () => {};
+
+    handleChanges = (e) => {
+        var id = e.target.getAttribute("id");
+        if (id === "gender-select") {
+            this.setState({ Gender: e.target.value })
+        }
+        if (id === "race-select") {
+            this.setState({ Race: e.target.value })
+        }
+        if (id === "nationality-select") {
+            this.setState({ Nationality: e.target.value })
+        }
+        if (id === "occupation-select") {
+            this.setState({ Occupation: e.target.value })
+        }
+        if (id === "description-select") {
+            this.setState({ Description: e.target.value })
+        }
+        if (id === "backstory-select") {
+            this.setState({ Backstory: e.target.value })
+        }
+    }
+
 
     render() {
         return (
@@ -18,14 +52,14 @@ class CharacterForm extends React.Component {
                     <Card.Header>Enter Character Details:</Card.Header>
                     <Card.Body>
                         <Form.Label>First Name: </Form.Label>
-                        <Form.Control placeholder="Enter Name" />
+                        <Form.Control id="first-name-enter" placeholder="Enter Name" />
                         <br />
                         <Form.Label>Last Name: </Form.Label>
-                        <Form.Control placeholder="Enter Name" />
+                        <Form.Control id="last-name-enter" placeholder="Enter Name" />
                         <div className="row">
                             <div className="col-sm">
                                 <p>Gender:</p>
-                                <Form.Select>
+                                <Form.Select onChange={this.handleChanges} id="gender-select">
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Variant">Variant</option>
@@ -36,18 +70,18 @@ class CharacterForm extends React.Component {
                             </div>
                             <div className="col-sm">
                                 <p>Race:</p>
-                                <Form.Select>
-                                    <option>Asian</option>
-                                    <option>Black</option>
-                                    <option>Hispanic</option>
-                                    <option>Mixed</option>
-                                    <option>White</option>
-                                    <option>Not Applicable</option>
+                                <Form.Select onChange={this.handleChanges} id="race-select">
+                                    <option value="Asian">Asian</option>
+                                    <option value="Black">Black</option>
+                                    <option value="Hispanic">Hispanic</option>
+                                    <option value="Mixed">Mixed</option>
+                                    <option value="White">White</option>
+                                    <option value="Not Applicable">Not Applicable</option>
                                 </Form.Select>
                             </div>
                             <div className="col-sm">
                                 <p>Nationality:</p>
-                                <Form.Select>
+                                <Form.Select onChange={this.handleChanges} id="nationality-select">
                                     <option value="Argentina">Argentina</option>
                                     <option value="Australia">Australia</option>
                                     <option value="Bangladesh">Bangladesh</option>
@@ -108,7 +142,7 @@ class CharacterForm extends React.Component {
                             </div>
                             <div className="col-sm">
                                 <p>Occupation:</p>
-                                <Form.Select>
+                                <Form.Select onChange={this.handleChanges} id="occupation-select">
                                     <option value="Accountant">Accountant</option>
                                     <option value="Actor">Actor</option>
                                     <option value="Animator">Animator</option>
@@ -194,13 +228,12 @@ class CharacterForm extends React.Component {
                             
                         </div>
                         <p>Character Description:</p>
-                        <Form.Control placeholder="Enter Details" as="textarea" rows={3} />
+                        <Form.Control id="description-select" onChange={this.handleChanges} placeholder="Enter Details" as="textarea" rows={3} />
                         <p>Character Backstory:</p>
-                        <Form.Control placeholder="Enter Details" as="textarea" rows={3} />
+                        <Form.Control id="backstory-select" onChange={this.handleChanges} placeholder="Enter Details" as="textarea" rows={3} />
                         <br />
-                        <Button variant="success" onClick={
-                            console.log("You have submitted a Character!")
-                            
+                        <Button variant="success" onClick={() =>
+                            projectAPI.addCharacter(this.state.Name, this.state.Gender, this.state.Race, this.state.Nationality, this.state.Occupation, this.state.Description, this.state.Backstory)
                             }>Submit Character</Button>
                     </Card.Body>
                 </Card>
