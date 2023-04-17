@@ -1,6 +1,17 @@
+
+
 const Project_ENDPOINT = 'https://6405117feed195a99f7baa23.mockapi.io/CharaList/Webpage'
 
 class ProjectAPI {
+    constructor() {
+        // Trying to set the array for each category here, do not know if this can be done in the API
+        this.state = {
+            characterList: [],
+            weaponList: [],
+            powerList: [],
+        }
+    }
+    //Read Command for the Entire Project.
     get = async () => {
         try {
             const resp = await fetch(Project_ENDPOINT)
@@ -11,10 +22,12 @@ class ProjectAPI {
             console.log("There is an issue with Fetching the Project.")
         }
     }
+    //Commands for the Character to be uploaded, updated and deleted from the API.
+
     addCharacter = (name, gender, race, nationality, occupation, description, backstory) => {
         console.log("name:", name, "gender:", gender, "race:", race, "nationality:", nationality, "occupation:", occupation, "description:", description, "backstory:", backstory)
         try {
-            fetch(this.Project_ENDPOINT + "/characterInfo", {
+            fetch(Project_ENDPOINT, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -22,6 +35,7 @@ class ProjectAPI {
                 body: JSON.stringify({name: name, gender: gender, race: race, nationality: nationality, occupation: occupation, description: description, backstory: backstory}),
             }).then((result) => {
                 this.get();
+                console.log("test")
                 console.log(result)
             })
         } catch(e) {
@@ -29,27 +43,47 @@ class ProjectAPI {
         }
     }
 
+    updateCharacter = (newName, characterId) => {
+        console.log("new name:", newName, "character id:", characterId)
+        try {
+            fetch(Project_ENDPOINT + "/" + characterId, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name: newName })
+            })
+        } catch (e) {
+            console.log("There is an issue with Updating Characters.")
+        }
+    }
+
     deleteCharacter = (characterId) => {
         console.log(characterId)
         try {
-            fetch(this.Project_ENDPOINT, {
+            fetch(Project_ENDPOINT + "/" + characterId, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
             }).then((result) => {
-                console.log(result)
                 this.get();
+                console.log("test")
+                console.log(result)
             })
         } catch(e) {
             console.log("There is an issue with Deleting Characters.")
         }
     }
 
+    //Commands for the Weapons (trying to do it locally and nested it inside the character)
+
     addWeapon = (name, slot, weaponType, clipType, specialType) => {
         console.log("name:", name, "slot:", slot, "weapon type:", weaponType, "clip type:", clipType, "special type:", specialType)
+        // this.setState({ weaponList: [...this.state.weaponList, ...[this.state.name, this.state.slot, this.state.weaponType, this.state.clipType, this.state.specialType ]]})
+        console.log(this.state.weaponList)
         try {
-            fetch(this.Project_ENDPOINT + "/weaponInfo", {
+            fetch(Project_ENDPOINT + "/weaponInfo", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -64,8 +98,8 @@ class ProjectAPI {
         }
     }
 
-    updateWeapon = (newName, weaponId) => {
-        console.log(newName, weaponId)
+    updateWeapon = (newName, characterId, weaponId) => {
+        console.log("new name:", newName, "character id:", characterId, "weapon id:", weaponId)
         try {
 
         } catch(e) {
@@ -73,14 +107,16 @@ class ProjectAPI {
         }
     }
 
-    deleteWeapon = (weaponId) => {
-        console.log(weaponId)
+    deleteWeapon = (characterId, weaponId) => {
+        console.log("character id:", characterId, "weapon id:", weaponId)
         try {
 
         } catch(e) {
             console.log("There is an issue with Deleting Weapons.")
         }
     }
+
+    // Commands for the Powers (similarly trying to store locally in a setState before the Character is added with them)
 
     addPower = (name, details) => {
         console.log("power name:", name, "power details:", details)
@@ -91,8 +127,8 @@ class ProjectAPI {
         }
     }
 
-    updatePower = (newName, powerId) => {
-        console.log(newName, powerId)
+    updatePower = (newName, characterId, powerId) => {
+        console.log("new name:", newName, "character id:", characterId, "power id:", powerId)
         try {
 
         } catch(e) {
@@ -100,8 +136,8 @@ class ProjectAPI {
         }
     }
 
-    deletePower = (powerId) => {
-        console.log(powerId)
+    deletePower = (characterId, powerId) => {
+        console.log("character id:", characterId, "power id:", powerId)
         try {
 
         } catch(e) {

@@ -11,6 +11,8 @@ class CharacterForm extends React.Component {
         
         this.state = {
             Name: "",
+            FirstName: "",
+            LastName: "",
             Gender: "Male",
             Race: "Asian",
             Nationality: "Argentina",
@@ -24,6 +26,16 @@ class CharacterForm extends React.Component {
 
     handleChanges = (e) => {
         var id = e.target.getAttribute("id");
+        if (id === "first-name-enter") {
+            this.setState({ FirstName: e.target.value})
+            this.combineNames()
+            console.log(this.state.FirstName)
+        }
+        if (id === "last-name-enter") {
+            this.setState({ LastName: e.target.value})
+            this.combineNames()
+            console.log(this.state.LastName)
+        }
         if (id === "gender-select") {
             this.setState({ Gender: e.target.value })
         }
@@ -44,6 +56,10 @@ class CharacterForm extends React.Component {
         }
     }
 
+    combineNames = () => {
+        this.setState({Name: this.state.FirstName + " " + this.state.LastName})
+    }
+
 
     render() {
         return (
@@ -52,10 +68,10 @@ class CharacterForm extends React.Component {
                     <Card.Header>Enter Character Details:</Card.Header>
                     <Card.Body>
                         <Form.Label>First Name: </Form.Label>
-                        <Form.Control id="first-name-enter" placeholder="Enter Name" />
+                        <Form.Control onChange={this.handleChanges} id="first-name-enter" placeholder="Enter Name" />
                         <br />
                         <Form.Label>Last Name: </Form.Label>
-                        <Form.Control id="last-name-enter" placeholder="Enter Name" />
+                        <Form.Control onChange={this.handleChanges} id="last-name-enter" placeholder="Enter Name" />
                         <div className="row">
                             <div className="col-sm">
                                 <p>Gender:</p>
@@ -232,8 +248,8 @@ class CharacterForm extends React.Component {
                         <p>Character Backstory:</p>
                         <Form.Control id="backstory-select" onChange={this.handleChanges} placeholder="Enter Details" as="textarea" rows={3} />
                         <br />
-                        <Button variant="success" onClick={() =>
-                            projectAPI.addCharacter(this.state.Name, this.state.Gender, this.state.Race, this.state.Nationality, this.state.Occupation, this.state.Description, this.state.Backstory)
+                        <Button variant="success" onClick={
+                            () => projectAPI.addCharacter(this.state.Name, this.state.Gender, this.state.Race, this.state.Nationality, this.state.Occupation, this.state.Description, this.state.Backstory)
                             }>Submit Character</Button>
                     </Card.Body>
                 </Card>

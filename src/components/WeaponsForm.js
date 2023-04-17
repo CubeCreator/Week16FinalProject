@@ -10,6 +10,7 @@ class WeaponsForm extends React.Component {
         super(props)
 
         this.state = {
+            weaponList: [],
             weaponName: "",
             weaponSlot: "Primary",
             weaponType: "Hitscan",
@@ -37,6 +38,7 @@ class WeaponsForm extends React.Component {
         if (id === "specialType-select") {
             this.setState({ specialType: e.target.value})
         }
+
     }
 
     render() {
@@ -83,6 +85,7 @@ class WeaponsForm extends React.Component {
                         <br />
                         <Button onClick={() =>
                             projectAPI.addWeapon(this.state.weaponName, this.state.weaponSlot, this.state.weaponType, this.state.clipType, this.state.specialType)
+                            //this.setState({ weaponList: [...this.state.weaponList, ...[this.state.weaponName, this.state.weaponSlot, this.state.weaponType, this.state.clipType, this.state.specialType]] })
                         }>Submit Weapon</Button>
                     </Card.Body>
                 </Card>
