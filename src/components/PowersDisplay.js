@@ -7,7 +7,7 @@ class PowersDisplay extends React.Component {
         super(props)
 
         this.state = {
-            powerList: null
+            listOfPowers: null
         }
     }
 
@@ -15,24 +15,26 @@ class PowersDisplay extends React.Component {
         this.getPowers();
     };
 
+    //Get data from the Array/List of Powers in the API.
     getPowers = async () => {
-        const powerList = await projectAPI.get();
-        this.setState({ powerList })
+        const data = await projectAPI.get();
+        this.setState({ listOfPowers: data })
     };
 
     render () {
-        if (this.state.powerList !== null)
-            var powers = (this.state.powerList.map((n, index) => {
+        if (this.state.listOfPowers !== null)
+            var powers = (this.state.listOfPowers.map((n, index) => {
                 return (
                     <div key={index}>
                         <h5>{n.powerInfo.PowerName}</h5>
-                        <p>{n.powerInfo.PowerDetails}</p>
+                        <p>Details: {n.powerInfo.PowerDetails}</p>
                     </div>
                 )
 
             })
         );
         else {
+            // Return this if there is nothing in the state
                 return (
                     <div>
                         <h5>Current Powers & Abilities:</h5>
@@ -43,6 +45,7 @@ class PowersDisplay extends React.Component {
         
         return (
             <div>
+                {/* Display the current array/data of Powers */}
                 <h5>Current Power & Abilities:</h5>
                 <br />
                 {powers}

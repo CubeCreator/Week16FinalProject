@@ -21,16 +21,19 @@ class FullDisplayPage extends React.Component {
         //this.fetchCharacters();
     };
 
+    //Get the Character Data from the API.
     fetchCharacters = async () => {
         let data = await projectAPI.get();
         this.setState({ characters: data })
     }
 
+    //Delete Character function [Problem: The visual updating isn't consistent]
     async deleteCharacter (characterId) {
         await projectAPI.deleteCharacter(characterId)
         this.fetchCharacters();
     }
 
+    //Update the States for the Name Update Commands/Functions
     handleChanges = (e) => {
         var id = e.target.getAttribute("id");
         if (id === "updateCharacterName") {
@@ -95,6 +98,7 @@ class FullDisplayPage extends React.Component {
 
         return (
             <div>
+                {/* Display the content */}
                 <h3>Submitted Characters:</h3>
                 <div >
                     {content}
