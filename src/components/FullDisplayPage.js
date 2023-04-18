@@ -36,14 +36,17 @@ class FullDisplayPage extends React.Component {
         if (id === "updateCharacterName") {
             this.setState({ newCharacterName: e.target.value })
             console.log("newCharacterName:", this.state.newCharacterName)
+            this.fetchCharacters();
         }
         if (id === "updateWeaponName") {
             this.setState({ newWeaponName: e.target.value })
             console.log("newWeaponName:", this.state.newWeaponName)
+            this.fetchCharacters();
         }
         if (id === "updatePowerName") {
             this.setState({ newPowerName: e.target.value })
             console.log("newPowerName:", this.state.newPowerName)
+            this.fetchCharacters();
         }
     }
 
