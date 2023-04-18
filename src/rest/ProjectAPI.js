@@ -27,6 +27,7 @@ class ProjectAPI {
     addCharacter = (name, gender, race, nationality, occupation, description, backstory) => {
         console.log("name:", name, "gender:", gender, "race:", race, "nationality:", nationality, "occupation:", occupation, "description:", description, "backstory:", backstory)
         try {
+            // Note: Find a way to upload the Arrays to the API in this function
             fetch(Project_ENDPOINT, {
                 method: "POST",
                 headers: {
@@ -37,10 +38,12 @@ class ProjectAPI {
                 this.get();
                 console.log("test")
                 console.log(result)
+                return result
             })
         } catch(e) {
             console.log("There is an issue with Adding Characters.")
         }
+        this.get();
     }
 
     updateCharacter = (newName, characterId) => {
@@ -52,10 +55,15 @@ class ProjectAPI {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ name: newName })
+            }).then((result) => {
+                this.get();
+                console.log(result)
+                return result
             })
         } catch (e) {
             console.log("There is an issue with Updating Characters.")
         }
+        this.get();
     }
 
     deleteCharacter = (characterId) => {
@@ -67,13 +75,14 @@ class ProjectAPI {
                     "Content-Type": "application/json",
                 },
             }).then((result) => {
-                this.get();
                 console.log("test")
                 console.log(result)
+                return result
             })
         } catch(e) {
             console.log("There is an issue with Deleting Characters.")
         }
+        //this.get();
     }
 
     //Commands for the Weapons (trying to do it locally and nested it inside the character)
@@ -101,7 +110,16 @@ class ProjectAPI {
     updateWeapon = (newName, characterId, weaponId) => {
         console.log("new name:", newName, "character id:", characterId, "weapon id:", weaponId)
         try {
-
+            fetch(Project_ENDPOINT + "/" + characterId + "/weaponInfo/" + weaponId, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ Weaponname: newName })
+            }).then((result) => {
+                this.get()
+                console.log(result)
+            })
         } catch(e) {
             console.log("There is an issue with Update Weapons.")
         }
@@ -110,7 +128,15 @@ class ProjectAPI {
     deleteWeapon = (characterId, weaponId) => {
         console.log("character id:", characterId, "weapon id:", weaponId)
         try {
-
+            fetch(Project_ENDPOINT + "/" + characterId + "/weaponInfo/" + weaponId, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }).then((result) => {
+                console.log(result)
+                this.get()
+            })
         } catch(e) {
             console.log("There is an issue with Deleting Weapons.")
         }
@@ -130,7 +156,16 @@ class ProjectAPI {
     updatePower = (newName, characterId, powerId) => {
         console.log("new name:", newName, "character id:", characterId, "power id:", powerId)
         try {
-
+            fetch(Project_ENDPOINT + "/" + characterId + "/powerInfo/" + powerId, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ PowerName: newName })
+            }).then((result) => {
+                console.log(result)
+                this.get()
+            })
         } catch(e) {
             console.log("There is an issue with Updating Powers.")
         }
@@ -139,7 +174,15 @@ class ProjectAPI {
     deletePower = (characterId, powerId) => {
         console.log("character id:", characterId, "power id:", powerId)
         try {
-
+            fetch(Project_ENDPOINT + "/" + characterId + "/powerInfo/" + powerId, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then((result) => {
+                console.log(result)
+                this.get()
+            })
         } catch(e) {
             console.log("There is an issue with Deleting Powers.")
         }

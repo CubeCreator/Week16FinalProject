@@ -15,17 +15,36 @@ class FullDisplayPage extends React.Component {
     }
 
     componentDidMount = () => {
-        this.fetchCharacters();
+        projectAPI.get().then((data) => {
+            this.setState({ characters: data })
+        })
+        //this.fetchCharacters();
     };
 
     fetchCharacters = async () => {
-        const characters = await projectAPI.get();
-        this.setState({ characters })
+        let data = await projectAPI.get();
+        this.setState({ characters: data })
     }
 
-    deleteCharacter = (characterId) => {
-        projectAPI.deleteCharacter(characterId)
+    async deleteCharacter (characterId) {
+        await projectAPI.deleteCharacter(characterId)
         this.fetchCharacters();
+    }
+
+    handleChanges = (e) => {
+        var id = e.target.getAttribute("id");
+        if (id === "updateCharacterName") {
+            this.setState({ newCharacterName: e.target.value })
+            console.log("newCharacterName:", this.state.newCharacterName)
+        }
+        if (id === "updateWeaponName") {
+            this.setState({ newWeaponName: e.target.value })
+            console.log("newWeaponName:", this.state.newWeaponName)
+        }
+        if (id === "updatePowerName") {
+            this.setState({ newPowerName: e.target.value })
+            console.log("newPowerName:", this.state.newPowerName)
+        }
     }
 
     render() {
@@ -39,7 +58,7 @@ class FullDisplayPage extends React.Component {
                             this.deleteCharacter(n.id)
                         }> Delete Character </Button>
                         <Form>
-                            <Form.Control id="updateCharacterName" placeholder="Enter New Name"/>
+                            <Form.Control onChange={this.handleChanges} id="updateCharacterName" placeholder="Enter New Name"/>
                         </Form>
                         <br />
                         {/* Update Character Form & Button */}
@@ -51,7 +70,7 @@ class FullDisplayPage extends React.Component {
                         <p>Weapons: {n.weaponInfo}</p>
                         {/* Update Weapon Form & Button */}
                         <Form>
-                            <Form.Control id="updateWeaponName" placeholder="Enter New Name"/>
+                            <Form.Control onChange={this.handleChanges} id="updateWeaponName" placeholder="Enter New Name"/>
                         </Form>
                         <Button onClick={() => 
                             projectAPI.updateWeapon(this.state.newCharacterName, n.id)}>
@@ -60,7 +79,7 @@ class FullDisplayPage extends React.Component {
                         <p>Power & Abilities: {n.powerInfo}</p>
                         {/* Update Power Form and Button */}
                         <Form>
-                            <Form.Control id="updatePowerName" placeholder="Enter New Name"/>
+                            <Form.Control onChange={this.handleChanges} id="updatePowerName" placeholder="Enter New Name"/>
                         </Form>
                         <Button onClick={() => 
                             projectAPI.updatePower()}>
