@@ -2,7 +2,8 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { projectAPI } from "../rest/ProjectAPI.js";
+import { powersDisplay } from "./PowersDisplay";
+//import { projectAPI } from "../rest/ProjectAPI.js";
 
 class PowersForm extends React.Component {
     constructor(props) {
@@ -11,11 +12,13 @@ class PowersForm extends React.Component {
         this.state = {
             powerName: "",
             powerDetails: "",
+            listOfPowers: [],
         }
     }
 
     componentDidMount = () => {};
 
+    //Change the values of each state for the Powers
     handleChanges = (e) => {
         var id = e.target.getAttribute("id")
         if (id === "powerName-select") {
@@ -24,6 +27,12 @@ class PowersForm extends React.Component {
         if (id === "powerDetails-select") {
             this.setState({ powerDetails: e.target.value })
         }
+    }
+
+    //Add characters to the state array.
+    addPowers = (PowerName, PowerDetails) => {
+        this.setState({ listOfPowers: [...this.state.listOfPowers, ...[PowerName, PowerDetails]]})
+        powersDisplay.getPowers();
     }
 
     render() {
@@ -39,7 +48,7 @@ class PowersForm extends React.Component {
                         <br />
                         
                         <Button onClick={() =>
-                            projectAPI.addPower(this.state.powerName, this.state.powerDetails)
+                            this.addPowers(this.state.powerName, this.state.powerDetails)
                         }>Submit Power</Button>
                     </Card.Body>
                 </Card>
@@ -50,3 +59,5 @@ class PowersForm extends React.Component {
 }
 
 export default PowersForm;
+
+export const powersForm = new PowersForm();

@@ -8,6 +8,7 @@ class FullDisplayPage extends React.Component {
 
         this.state = {
             characters: [],
+            weapons: [],
             newCharacterName: "",
             newWeaponName: "",
             newPowerName: "",
@@ -27,6 +28,10 @@ class FullDisplayPage extends React.Component {
         this.setState({ characters: data })
     }
 
+    fetchWeapons = async (id) => {
+        let data = await projectAPI.getWeapons(id);
+        this.setState({ weapons: data})
+    }
     //Delete Character function [Problem: The visual updating isn't consistent]
     async deleteCharacter (characterId) {
         await projectAPI.deleteCharacter(characterId)
@@ -56,6 +61,17 @@ class FullDisplayPage extends React.Component {
     render() {
         if (this.state.characters !== []) {
             var content = (this.state.characters.map((n, index) => {
+                var weaponContents = (this.state.weapons.map((n, index) => {
+                    return (
+                        <Card key={index}>
+                            <h4>{n.WeaponName}</h4>
+                            <p>Slot: {n.WeaponSlot}</p>
+                            <p>Type: {n.WeaponType}</p>
+                            <p>Clip: {n.ClipType}</p>
+                            <p>Special: {n.SpecialType}</p>
+                        </Card>
+                    )
+                }))
                 return (
                     <Card key={index}>
                         <h2>{n.name}</h2>
@@ -73,7 +89,7 @@ class FullDisplayPage extends React.Component {
                         </Button>
                         {/* Display the Arrays */}
                         <p>Character Info: {n.characterInfo}</p>
-                        <p>Weapons: {n.weaponInfo}</p>
+                        <p>Weapons: {weaponContents}</p>
                         {/* Update Weapon Form & Button */}
                         <Form>
                             <Form.Control onChange={this.handleChanges} id="updateWeaponName" placeholder="Enter New Name"/>

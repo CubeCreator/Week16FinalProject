@@ -22,13 +22,25 @@ class ProjectAPI {
             console.log("There is an issue with Fetching the Project.")
         }
     }
+
+    getWeapons = async (id) => {
+        try {
+            const resp = await fetch(Project_ENDPOINT + "/" + id + "/CRUDApp")
+            const data = await resp.json();
+            console.log(data)
+            return data;
+        } catch(e) {
+            console.log("There is an issue with Fetching the Weapons.")
+        }
+    }
+
     //Commands for the Character to be uploaded, updated and deleted from the API.
 
-    addCharacter = (name, gender, race, nationality, occupation, description, backstory) => {
+    addCharacter = async (name, gender, race, nationality, occupation, description, backstory) => {
         console.log("name:", name, "gender:", gender, "race:", race, "nationality:", nationality, "occupation:", occupation, "description:", description, "backstory:", backstory)
         try {
             // Note: Find a way to upload the Arrays to the API in this function
-            fetch(Project_ENDPOINT, {
+            await fetch(Project_ENDPOINT, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -46,10 +58,10 @@ class ProjectAPI {
         this.get();
     }
 
-    updateCharacter = (newName, characterId) => {
+    updateCharacter = async (newName, characterId) => {
         console.log("new name:", newName, "character id:", characterId)
         try {
-            fetch(Project_ENDPOINT + "/" + characterId, {
+            await fetch(Project_ENDPOINT + "/" + characterId, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -66,10 +78,10 @@ class ProjectAPI {
         this.get();
     }
 
-    deleteCharacter = (characterId) => {
+    deleteCharacter = async (characterId) => {
         console.log(characterId)
         try {
-            fetch(Project_ENDPOINT + "/" + characterId, {
+            await fetch(Project_ENDPOINT + "/" + characterId, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -87,12 +99,12 @@ class ProjectAPI {
 
     //Commands for the Weapons (trying to do it locally and nested it inside the character)
 
-    addWeapon = (name, slot, weaponType, clipType, specialType) => {
+    addWeapon = async (name, slot, weaponType, clipType, specialType) => {
         console.log("name:", name, "slot:", slot, "weapon type:", weaponType, "clip type:", clipType, "special type:", specialType)
         // this.setState({ weaponList: [...this.state.weaponList, ...[this.state.name, this.state.slot, this.state.weaponType, this.state.clipType, this.state.specialType ]]})
         console.log(this.state.weaponList)
         try {
-            fetch(Project_ENDPOINT + "/weaponInfo", {
+            await fetch(Project_ENDPOINT, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -107,10 +119,10 @@ class ProjectAPI {
         }
     }
 
-    updateWeapon = (newName, characterId, weaponId) => {
+    updateWeapon = async (newName, characterId, weaponId) => {
         console.log("new name:", newName, "character id:", characterId, "weapon id:", weaponId)
         try {
-            fetch(Project_ENDPOINT + "/" + characterId + "/weaponInfo/" + weaponId, {
+            await fetch(Project_ENDPOINT + "/" + characterId + "/weaponInfo/" + weaponId, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -125,10 +137,10 @@ class ProjectAPI {
         }
     }
 
-    deleteWeapon = (characterId, weaponId) => {
+    deleteWeapon = async (characterId, weaponId) => {
         console.log("character id:", characterId, "weapon id:", weaponId)
         try {
-            fetch(Project_ENDPOINT + "/" + characterId + "/weaponInfo/" + weaponId, {
+            await fetch(Project_ENDPOINT + "/" + characterId + "/weaponInfo/" + weaponId, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -188,4 +200,4 @@ class ProjectAPI {
         }
     }
 }
-export const projectAPI = new ProjectAPI;
+export const projectAPI = new ProjectAPI();

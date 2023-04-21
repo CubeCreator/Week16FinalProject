@@ -6,22 +6,25 @@ class WeaponsDisplay extends React.Component {
         super(props)
 
         this.state = {
-            listOfWeapons: null
+            listOfWeapons: [],
+            currentId: 1,
         }
     }
 
     componentDidMount = () => {
-        this.getWeapons();
+        this.getWeapons(this.state.currentId);
     };
 
     //set state of the WeaponList Here
     getWeapons = async () => {
-        const data = await projectAPI.get();
+        const data = await projectAPI.getWeapons(this.state.currentId);
+        console.log(data)
         this.setState({ listOfWeapons: data })
+        console.log(this.state.listOfWeapons)
     }
 
     render () {
-        if (this.state.listOfWeapons !== null)
+        if (this.state.listOfWeapons !== [])
             var weapons = (this.state.listOfWeapons.map((n, index) => {
                 return (
                     <div key={index}>
